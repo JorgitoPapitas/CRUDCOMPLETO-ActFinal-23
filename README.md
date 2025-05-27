@@ -11,13 +11,13 @@ A medida que fue creciendo el proyecto se fueron agregando mas cosas que me pudi
 ## 📸 Capturas de la Aplicación
 
 ### Vista principal
-![Vista principal](./imagenes/vista-principal.png)
+![Vista principal](./Evidencias/pagina-inicial.png)
 
 ### Formulario de nuevo cliente
-![Formulario cliente](./imagenes/formulario-cliente.png)
+![Formulario cliente](./Evidencias/agregar-cliente.png)
 
 ### Tabla de clientes
-![Tabla clientes](./imagenes/tabla-clientes.png)
+![Tabla clientes](./Evidencias/tabla-clientes.png)
 
 ---
 
