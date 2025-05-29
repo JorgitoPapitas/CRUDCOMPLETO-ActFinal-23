@@ -8,7 +8,6 @@ function EditarCliente() {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-
     fetch('http://localhost:3000/Clientes', {
       headers: {
         'Authorization': `Bearer ${token}`
@@ -31,11 +30,9 @@ function EditarCliente() {
   }, [id, navigate]);
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem('token');
-
     const res = await fetch(`http://localhost:3000/EditarCliente/${id}`, {
       method: 'PUT',
       headers: {
@@ -52,6 +49,7 @@ function EditarCliente() {
     }
     navigate('/clientes');
   };
+
   return (
     <div className="form-container">
       <h2 className='titulo-negro'>EDITAR CLIENTE</h2>

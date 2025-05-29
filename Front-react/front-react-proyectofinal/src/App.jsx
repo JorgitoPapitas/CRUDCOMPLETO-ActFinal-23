@@ -1,4 +1,3 @@
-// src/App.jsx
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
@@ -8,7 +7,6 @@ import AgregarCliente from './pages/AgregarCliente';
 import EditarCliente from './pages/EditarCliente';
 import Login from './pages/Login';
 import RutaProtegida from './componente/ProtegerRuta';
-
 
 function App() {
   const [clientes, setClientes] = useState([]);
@@ -23,29 +21,28 @@ function App() {
 
   return (
       <BrowserRouter>
-  <Routes>
-    <Route path="/" element={<Home />} />
-    <Route path="/login" element={<Login />} />
-    
-    <Route
-      path="/clientes"
-      element={
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="/clientes"
+          element={
         <RutaProtegida>
           <Clientes />
         </RutaProtegida>
       }
     />
-    <Route
-      path="/agregar"
-      element={
+      <Route
+        path="/agregar"
+        element={
         <RutaProtegida>
           <AgregarCliente />
         </RutaProtegida>
       }
     />
       <Route
-      path="/editar/:id"
-      element={
+        path="/editar/:id"
+        element={
         <RutaProtegida>
           <EditarCliente />
         </RutaProtegida>

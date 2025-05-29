@@ -26,7 +26,7 @@ app.post('/login', (req, res) => {
 })
 
 // Middleware para verificar el token
-function verificarToken(req, res, next) { // middleware
+function verificarToken(req, res, next) { 
     const header = req.header('Authorization') || '';
     const token = header.split(' ')[1];
     if (!token) {
