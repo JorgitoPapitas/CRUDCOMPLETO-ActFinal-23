@@ -4,6 +4,8 @@ const clientes = require('./models/clientes') // Importar los modelos de las bd
 const cors = require('cors') // para permitir conexiones desde el front
 const app = express()
 const puerto = 3000
+const jwt = require('jsonwebtoken')
+const secretKey = 'secret'
 
 app.use(cors())
 app.use(bodyParser.json())
@@ -12,10 +14,38 @@ app.listen(puerto, () => {
     console.log('servicio iniciado...')
 })
 
+// Login para obtener el token
+app.post('/login', (req, res) => {
+    const { usuario, password } = req.body;
+    if (usuario == 'admin' && password == '123') {
+        const token = jwt.sign({ usuario }, secretKey, { expiresIn: '1h' })
+        res.send(token)
+    } else {
+        res.sendStatus(404)
+    }
+})
+
+// Middleware para verificar el token
+function verificarToken(req, res, next) { // middleware
+    const header = req.header('Authorization') || '';
+    const token = header.split(' ')[1];
+    if (!token) {
+        res.status(401).json({ mensaje: 'token no proporcionado' });
+    } else {
+        try {
+            const payload = jwt.verify(token, secretKey); // extraer la información del token
+            next();
+        }
+        catch {
+            res.status(400).json({ mensaje: 'token incorrecto' })
+        }
+    }
+}
+
 /////////////////////////////////CRUD PARA CLIENTES///////////////////////////////
 
 // Agregar nuevo cliente
-app.post('/AgregarCliente', async (req, res) => {
+app.post('/AgregarCliente', verificarToken, async (req, res) => {
     const { nombre, correo, telefono, direccion } = req.body;
 
     try {
@@ -27,7 +57,7 @@ app.post('/AgregarCliente', async (req, res) => {
 });
 
 // Obtener los datos de los clientes
-app.get('/Clientes', async (req, res) => {
+app.get('/Clientes', verificarToken, async (req, res) => {
     try {
         const data = await clientes.findAll();
         res.send(data);
@@ -37,7 +67,7 @@ app.get('/Clientes', async (req, res) => {
 });
 
 // Editar cliente existente con parametro de ruta de id
- app.put('/EditarCliente/:id', async (req, res) => {
+ app.put('/EditarCliente/:id', verificarToken, async (req, res) => {
     const { id } = req.params
     
     const { nombre, correo, telefono, direccion } = req.body
@@ -58,7 +88,7 @@ app.get('/Clientes', async (req, res) => {
 })
 
 // Eliminar Clientes
-app.delete('/EliminarCliente/:id', async (req, res) => {
+app.delete('/EliminarCliente/:id', verificarToken, async (req, res) => {
   const { id } = req.params;
 
   try {

@@ -8,22 +8,39 @@ function Clientes() {
   const [clientes, setClientes] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/Clientes')
-      .then((res) => res.json())
-      .then((data) => setClientes(data))
+  const token = localStorage.getItem('token');
+  fetch('http://localhost:3000/Clientes', {
+    headers: { 'Authorization': `Bearer ${token}` }
+  })
+    .then((res) => {
+      if (res.status === 401 || res.status === 400) {
+        alert('No autorizado. Redirigiendo al login.');
+        navigate('/login');
+        return;
+      }
+      return res.json();
+    })
+    .then((data) => {
+      if (data) setClientes(data);
+    });
   }, [location]);
 
   const eliminarCliente = async (id) => {
-    if (window.confirm('¿Estás seguro que deseas eliminar este cliente?')) {
-      const res = await fetch(`http://localhost:3000/EliminarCliente/${id}`, { method: 'DELETE' });
-      if (res.ok) {
-        alert('Cliente eliminado!!');
-        // Recargar la lista sin recargar toda la página:
-        const nuevosClientes = clientes.filter((c) => c.id !== id);
-        setClientes(nuevosClientes);
-      }
+  const token = localStorage.getItem('token');
+  if (window.confirm('¿Estás seguro que deseas eliminar este cliente?')) {
+    const res = await fetch(`http://localhost:3000/EliminarCliente/${id}`, {
+      method: 'DELETE',
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    if (res.ok) {
+      alert('Cliente eliminado!!');
+      const nuevosClientes = clientes.filter((c) => c.id !== id);
+      setClientes(nuevosClientes);
+    } else {
+      alert('No autorizado o error al eliminar');
     }
-  };
+  }
+};
 
   return (
     <div className="tabla-container">

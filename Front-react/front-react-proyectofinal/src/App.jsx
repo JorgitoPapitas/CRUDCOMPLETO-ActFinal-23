@@ -6,6 +6,9 @@ import Home from './pages/Home';
 import Clientes from './pages/Clientes';
 import AgregarCliente from './pages/AgregarCliente';
 import EditarCliente from './pages/EditarCliente';
+import Login from './pages/Login';
+import RutaProtegida from './componente/ProtegerRuta';
+
 
 function App() {
   const [clientes, setClientes] = useState([]);
@@ -19,15 +22,38 @@ function App() {
   }, []); 
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/clientes" element={<Clientes />} />
-        <Route path="/agregar" element={<AgregarCliente />} />
-        <Route path="/editar/:id" element={<EditarCliente />} />
-      </Routes>
-    </BrowserRouter>
-  );
+      <BrowserRouter>
+  <Routes>
+    <Route path="/" element={<Home />} />
+    <Route path="/login" element={<Login />} />
+    
+    <Route
+      path="/clientes"
+      element={
+        <RutaProtegida>
+          <Clientes />
+        </RutaProtegida>
+      }
+    />
+    <Route
+      path="/agregar"
+      element={
+        <RutaProtegida>
+          <AgregarCliente />
+        </RutaProtegida>
+      }
+    />
+      <Route
+      path="/editar/:id"
+      element={
+        <RutaProtegida>
+          <EditarCliente />
+        </RutaProtegida>
+      }
+    />
+    </Routes>
+  </BrowserRouter>
+  )
 }
 
 export default App;
