@@ -7,7 +7,7 @@
 **Fecha:** 29 Mayo 2025
 
 **Descripción:**   
-Este proyecto es una aplicación web simple que permite gestionar clientes mediante un frontend en React y un backend en Node.js con Express y Sequelize. Permite realizar operaciones básicas de CRUD (Crear, Leer, Actualizar y Eliminar). A medida que fue creciendo el proyecto se fueron agregando mas cosas que me pudieron ayudar a lograr cosas buenas (como reutilizar las rutas en react del semestre pasado). 
+Este proyecto es una aplicación web simple que permite gestionar clientes mediante un frontend en React y un backend en Node.js con Express y Sequelize. Permite realizar operaciones básicas de CRUD (Crear, Leer, Actualizar y Eliminar). A medida que fue creciendo el proyecto se fueron agregando mas cosas que me pudieron ayudar a lograr cosas buenas (como reutilizar las rutas en react del semestre pasado). Al final del README viene el link para descargar el PDF de la documentación del codigo.
 
 ---
 
@@ -70,5 +70,6 @@ Este proyecto es una aplicación web simple que permite gestionar clientes media
 
 ---
 
-### 📂 Actividad Final CRUD + JWT - PDF CON EXPLICACION DE CODIGO (VISUAL STUDIO)
-[Explicacion del Codigo](./Documentacion/Explicacion del Codigo FrontEnd y BackEnd.pdf)
+## 📂 Actividad Final CRUD + JWT - PDF CON EXPLICACION DE CODIGO (VISUAL STUDIO)
+DESCARGAR PDF 
+--------> [Explicación del Código FrontEnd y BackEnd](./Documentacion/Explicacion%20del%20Codigo%20FrontEnd%20y%20BackEnd.pdf)
